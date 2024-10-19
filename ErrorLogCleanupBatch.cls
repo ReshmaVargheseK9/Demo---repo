@@ -22,9 +22,7 @@ global class ErrorLogCleanupBatch implements Database.Batchable<SObject>, schedu
     global void execute(Database.BatchableContext bc, List<SObject> scope){
         try {
             List<Database.DeleteResult> results = Database.Delete(scope, false);
-            ElasticUtilsExceptionManager.handleErrorsForDeleteResult(results, scope, '' , 'ErrorLogCleanupBatch', 'DELETE');
         } catch(Exception e) {
-            ElasticUtilsExceptionManager.logSimpleException(e,'','ErrorLogCleanupBatch','',null,'Unable to delete records.');
         }
     }
     global void finish(Database.BatchableContext bc) { 
